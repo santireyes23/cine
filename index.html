@@ -381,9 +381,11 @@
   // Guardar en Google Sheets
   const URL_SCRIPT = https://script.google.com/macros/s/AKfycbw6nNW4GW_AfEM22lWbWjeoSWMw1tZKJMMQlBjAOkJbmc4hdJGniTu43vXomMGwtie8/exec;
   fetch(URL_SCRIPT, {
-    method: 'POST',
-    body: JSON.stringify({ fecha: label, hora: selectedTime }),
-  });
+  method: 'POST',
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'text/plain' },
+  body: JSON.stringify({ fecha: label, hora: selectedTime }),
+});
 }
 </script>
 </body>
