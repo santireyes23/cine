@@ -370,13 +370,21 @@
   }
 
   function goToSuccess() {
-    const d = selectedDate;
-    const dayNames = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
-    const label = dayNames[d.getDay()] + ' ' + d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
-    document.getElementById('chosenInfo').innerHTML = '📅 <strong>' + label + '</strong><br>🕐 <strong>' + selectedTime + '</strong>';
-    document.getElementById('screen2').classList.remove('active');
-    document.getElementById('screen3').classList.add('active');
-  }
+  const d = selectedDate;
+  const dayNames = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+  const label = dayNames[d.getDay()] + ' ' + d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+  
+  document.getElementById('chosenInfo').innerHTML = '📅 <strong>' + label + '</strong><br>🕐 <strong>' + selectedTime + '</strong>';
+  document.getElementById('screen2').classList.remove('active');
+  document.getElementById('screen3').classList.add('active');
+
+  // Guardar en Google Sheets
+  const URL_SCRIPT = https://script.google.com/macros/s/AKfycbw6nNW4GW_AfEM22lWbWjeoSWMw1tZKJMMQlBjAOkJbmc4hdJGniTu43vXomMGwtie8/exec;
+  fetch(URL_SCRIPT, {
+    method: 'POST',
+    body: JSON.stringify({ fecha: label, hora: selectedTime }),
+  });
+}
 </script>
 </body>
 </html>
